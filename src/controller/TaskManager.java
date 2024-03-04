@@ -3,16 +3,14 @@ package controller;
 import model.Epic;
 import model.Subtask;
 import model.Task;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
-    ArrayList<Task> getTasks();
+    List<Task> getTasks();
 
-    ArrayList<Epic> getEpics();
+    List<Epic> getEpics();
 
-    ArrayList<Subtask> getSubtasks();
+    List<Subtask> getSubtasks();
 
     Task getTaskById(int id);
 

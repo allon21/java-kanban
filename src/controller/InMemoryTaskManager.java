@@ -23,18 +23,20 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
 
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public ArrayList<Epic> getEpics() {
+    public List<Epic> getEpics() {
+
         return new ArrayList<>(epics.values());
     }
 
     @Override
-    public ArrayList<Subtask> getSubtasks() {
+    public List<Subtask> getSubtasks() {
+
         return new ArrayList<>(subtasks.values());
     }
 
@@ -138,7 +140,6 @@ public class InMemoryTaskManager implements TaskManager {
         if (epics.containsKey(id)) {
             epics.get(id).getSubtasks().clear();
             epics.remove(id);
-            checkStatus(epics.get(id));
         }
     }
 
@@ -159,7 +160,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void checkStatus(Epic epic) {
         int newCounter = 0;
         int doneCounter = 0;
-        int inProgressCounter = 0;
         ArrayList<Integer> subtaskIdList = epic.getSubtasks();
 
         for (int subtaskId : subtaskIdList) {
@@ -171,9 +171,6 @@ public class InMemoryTaskManager implements TaskManager {
                 case NEW:
                     newCounter++;
                     break;
-                case IN_PROGRESS:
-                    inProgressCounter++;
-                    break;
             }
         }
 
@@ -181,7 +178,7 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setStatus(TaskStatus.DONE);
         } else if (newCounter == subtaskIdList.size()) {
             epic.setStatus(TaskStatus.NEW);
-        } else if (inProgressCounter == subtaskIdList.size()) {
+        } else {
             epic.setStatus(TaskStatus.IN_PROGRESS);
         }
     }

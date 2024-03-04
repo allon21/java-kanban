@@ -6,19 +6,22 @@ import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager{
 
-    private ArrayList<Task> historyList = new ArrayList<Task>();
+    private LinkedList <Task> historyList = new LinkedList<Task>();
 
     @Override
     public void add(Task task) {
-        if (historyList.size() >= 10){
-            historyList.remove(0);
+        if (!(task == null)){
+            if (historyList.size() >= 10){
+                historyList.removeFirst();
+            }
+
+            historyList.add(task);
         }
 
-        historyList.add(task);
     }
 
     @Override
     public List<Task> getHistory() {
-        return historyList;
+        return List.copyOf(historyList);
     }
 }
