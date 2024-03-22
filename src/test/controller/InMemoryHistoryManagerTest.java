@@ -19,11 +19,13 @@ class InMemoryHistoryManagerTest {
     ArrayList<Task> historyList;
     TaskManager taskManager = Managers.getDefault();
     Task task1;
+    Task task2;
+    Task task3;
 
     @BeforeEach
     void setUp(){
         task1  = new Task("Задача 1", "Описание", TaskStatus.NEW);
-        Task task2  = new Task("Задача 2", "Описание", TaskStatus.NEW);
+        task2  = new Task("Задача 2", "Описание", TaskStatus.NEW);
         taskManager.createTask(task1);
         taskManager.createTask(task2);
         taskManager.getTaskById(task1.getId());
@@ -33,20 +35,34 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void historyListShouldNotBeEmpty(){
-        assertNotEquals(0, historyList.size() , "Список не должен быть пустым");
+        assertNotEquals(0, historyList.size() , "taskManager.getHistory() должен вернуть " +
+                "не пустой список.");
     }
 
     @Test
     void historyListShouldBeSize3(){
-        Task task3  = new Task("Задача 3", "Описание", TaskStatus.NEW);
+        task3  = new Task("Задача 3", "Описание", TaskStatus.NEW);
         taskManager.createTask(task3);
         taskManager.getTaskById(task3.getId());
-        assertEquals(3, taskManager.getHistory().size(), "Неверное количество задач.");
+        taskManager.getTaskById(task2.getId());
+        taskManager.getTaskById(task3.getId());
+        taskManager.getTaskById(task1.getId());
+        assertEquals(3, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
+                "список с 3 значениями, независимо сколько раз мы доставали одну и туже задачу.");
     }
     @Test
     void historyListShouldBeRemoveTask(){
         taskManager.removeTaskById(task1.getId());
-        assertEquals(2, taskManager.getHistory().size(), "Неверное количество задач.");
+        assertEquals(1, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
+                "список с 2 значениями, после удаления задачи.");
+    }
+
+    @Test
+    void historyListShouldBeRemoveTask1(){
+        taskManager.removeTaskById(task1.getId());
+        taskManager.removeTaskById(task2.getId());
+        assertEquals(0, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
+                "пустой список");
     }
 
 }

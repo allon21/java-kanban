@@ -51,21 +51,21 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
 
         Node<Task> prevNode = node.getPrev();
-        Node<Task> prevNext = node.getNext();
+        Node<Task> nextNode = node.getNext();
 
-        if ((prevNode == null) && (prevNext != null)) {
-            first = prevNode;
-            prevNode.setPrev(null);
-        } else if (prevNode != null && prevNext == null) {
-            last = prevNode;
-            prevNode.setNext(null);
-        } else if (prevNode == null && prevNext == null) {
-            first = null;
-            last = null;
+        if (prevNode != null) {
+            prevNode.setNext(nextNode);
         } else {
-            prevNode.setNext(node.getNext());
-            prevNext.setNext(node.getPrev());
+            first = nextNode;
         }
+
+        if (nextNode != null) {
+            nextNode.setPrev(prevNode);
+        } else {
+            last = prevNode;
+        }
+
+
         historyHashMap.remove(node.getData().getId());
     }
 
