@@ -1,12 +1,9 @@
 package test.controller;
 
-import controller.HistoryManager;
 import controller.Managers;
 import controller.TaskManager;
-import model.Epic;
-import model.Subtask;
 import model.Task;
-import model.TaskStatus;
+import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

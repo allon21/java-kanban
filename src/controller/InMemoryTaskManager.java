@@ -3,7 +3,7 @@ package controller;
 import model.Epic;
 import model.Subtask;
 import model.Task;
-import model.TaskStatus;
+import enums.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,20 +23,27 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public List<Task> getTasks() {
+    public List<Task> getListOfAllTasks() {
+        List<Task> allTasks = new ArrayList<>();
+        allTasks.addAll(getTasks());
+        allTasks.addAll(getEpics());
+        allTasks.addAll(getSubtasks());
+        return allTasks;
+    }
 
+
+    @Override
+    public List<Task> getTasks() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
     public List<Epic> getEpics() {
-
         return new ArrayList<>(epics.values());
     }
 
     @Override
     public List<Subtask> getSubtasks() {
-
         return new ArrayList<>(subtasks.values());
     }
 

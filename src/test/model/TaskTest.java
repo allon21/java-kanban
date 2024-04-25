@@ -3,7 +3,7 @@ package test.model;
 import controller.Managers;
 import controller.TaskManager;
 import model.Task;
-import model.TaskStatus;
+import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -3,8 +3,7 @@ package test.model;
 import controller.Managers;
 import controller.TaskManager;
 import model.Epic;
-import model.Subtask;
-import model.TaskStatus;
+import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

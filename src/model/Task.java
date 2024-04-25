@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Objects;
+import enums.TaskStatus;
 
 public class Task {
     private String name;
