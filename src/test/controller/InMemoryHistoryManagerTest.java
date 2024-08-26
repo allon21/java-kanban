@@ -31,13 +31,13 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void historyListShouldNotBeEmpty(){
+    void historyListShouldNotBeEmpty() {
         assertNotEquals(0, historyList.size() , "taskManager.getHistory() должен вернуть " +
                 "не пустой список.");
     }
 
     @Test
-    void historyListShouldBeSize3(){
+    void historyListShouldBeSize3() {
         task3  = new Task("Задача 3", "Описание", TaskStatus.NEW);
         taskManager.createTask(task3);
         taskManager.getTaskById(task3.getId());
@@ -48,14 +48,14 @@ class InMemoryHistoryManagerTest {
                 "список с 3 значениями, независимо сколько раз мы доставали одну и туже задачу.");
     }
     @Test
-    void historyListShouldBeRemoveTask(){
+    void historyListShouldBeRemoveTask() {
         taskManager.removeTaskById(task1.getId());
         assertEquals(1, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
                 "список с 2 значениями, после удаления задачи.");
     }
 
     @Test
-    void historyListShouldBeRemoveTask1(){
+    void historyListShouldBeRemoveTask1() {
         taskManager.removeTaskById(task1.getId());
         taskManager.removeTaskById(task2.getId());
         assertEquals(0, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
