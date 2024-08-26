@@ -1,9 +1,10 @@
 package model;
 
-public class Node<Task>{
+public class Node<Task> {
     private Task data;
     private Node<Task> next;
     private Node<Task> prev;
+
     public Node(Node<Task> prev, Task data, Node<Task> next) {
         this.data = data;
         this.next = next;
