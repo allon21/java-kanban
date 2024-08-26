@@ -8,19 +8,19 @@ public class InMemoryHistoryManager implements HistoryManager {
     public Node<Task> last;
     private HashMap<Integer, Node<Task>> historyHashMap = new HashMap<>();
 
-    public void linkLast(Task task){
+    public void linkLast(Task task) {
         Node<Task> existingNode = historyHashMap.get(task.getId());
         Node<Task> newNode = new Node<>(last, task, null);
         historyHashMap.put(task.getId(), newNode);
-        if (existingNode != last){
+        if (existingNode != last) {
             removeNode(existingNode);
         }
 
-        if (last != null){
+        if (last != null) {
             last.setNext(newNode);
         }
 
-        if (first == null){
+        if (first == null) {
             first = newNode;
         }
 

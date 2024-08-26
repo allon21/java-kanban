@@ -31,7 +31,6 @@ public class InMemoryTaskManager implements TaskManager {
         return allTasks;
     }
 
-
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(tasks.values());
