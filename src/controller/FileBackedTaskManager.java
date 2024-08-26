@@ -1,13 +1,11 @@
 package controller;
 
 import enums.TaskStatus;
-import enums.TaskTypes;
 import model.Epic;
 import model.Subtask;
 import model.Task;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
@@ -24,7 +22,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         saveTaskToFile(historySaveFile, getListOfAllTasks());
     }
 
-    private void saveTaskToFile(File file ,List<Task> tasks ) {
+    private void saveTaskToFile(File file ,List<Task> tasks) {
         String title = "id,type,name,status,description,epic\n";
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(title);
@@ -39,12 +37,13 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
   public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager fileManager = new FileBackedTaskManager(file);
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             reader.readLine();
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 Task task = fileManager.fromString(line);
-                if(task != null){
+
+                if(task != null) {
                     fileManager.createTask(task);
                 }
             }
@@ -63,7 +62,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = tasks[2].trim();
         TaskStatus status = TaskStatus.valueOf(tasks[3].trim());
         String descrip = tasks[4].trim();
-        if (tasks.length > 5 && !tasks[5].trim().isEmpty()){
+        if (tasks.length > 5 && !tasks[5].trim().isEmpty()) {
             epicId = Integer.parseInt(tasks[5].trim());
         }
         switch (type) {
