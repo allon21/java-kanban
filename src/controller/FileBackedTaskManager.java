@@ -22,7 +22,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         saveTaskToFile(historySaveFile, getListOfAllTasks());
     }
 
-    private void saveTaskToFile(File file ,List<Task> tasks) {
+    private void saveTaskToFile(File file, List<Task> tasks) {
         String title = "id,type,name,status,description,epic\n";
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(title);
@@ -42,7 +42,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 Task task = fileManager.fromString(line);
-
                 if(task != null) {
                     fileManager.createTask(task);
                 }
