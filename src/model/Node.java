@@ -1,6 +1,6 @@
 package model;
 
-public class Node<Task> {
+public class Node<T> {
     private Task data;
     private Node<Task> next;
     private Node<Task> prev;
