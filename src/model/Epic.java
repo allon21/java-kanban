@@ -8,11 +8,13 @@ import java.util.Objects;
 
 public class Epic extends Task {
     private ArrayList<Integer> subtasksList = new ArrayList<>();
+
     public Epic(String name, String description, TaskStatus status) {
 
         super(name, description, status);
         this.setTaskType(TaskTypes.EPIC);
     }
+
     public ArrayList<Integer> getSubtasks() {
 
         return subtasksList;
