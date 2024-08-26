@@ -32,6 +32,7 @@ class TaskTest {
         task2.setId(1);
         assertEquals(task1, task2, "Две задачи с одинаковым id, не равны друг другу.");
     }
+
     @Test
     public void shouldEpicHaveSameNameWhenCreated() {
         String expectedName = task3.getName();
