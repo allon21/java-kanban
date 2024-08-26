@@ -42,7 +42,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 Task task = fileManager.fromString(line);
-                    if(task != null) {
+                    if (task != null) {
                         fileManager.createTask(task);
                     }
             }
