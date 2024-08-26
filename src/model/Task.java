@@ -16,14 +16,18 @@ public class Task {
         this.status = status;
         this.taskType = taskType;
     }
-// не грузит голова добавь сет и все по красоте надо
+
     public String getName() {
         return name;
     }
 
-    public TaskTypes getTaskType() { return taskType; }
+    public TaskTypes getTaskType() {
+        return taskType;
+    }
 
-    public void setTaskType(TaskTypes taskType) {this.taskType = taskType; }
+    public void setTaskType(TaskTypes taskType) {
+        this.taskType = taskType;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -59,8 +63,6 @@ public class Task {
                 "," + getStatus() +
                 "," + getDescription() + ",";
     }
-
-
 
     @Override
     public boolean equals(Object o) {
