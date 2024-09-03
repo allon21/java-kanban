@@ -5,7 +5,6 @@ import enums.TaskStatus;
 import model.Epic;
 import model.Subtask;
 import model.Task;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,6 @@ public class FileBackedTaskManagerTest {
     void setUp() {
         try{
             Files.deleteIfExists(Paths.get(TestFilePath));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +32,6 @@ public class FileBackedTaskManagerTest {
     void del() {
         try{
             Files.deleteIfExists(Paths.get(TestFilePath));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
