@@ -19,7 +19,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private void save() {
         saveTaskToFile(saveFile, getListOfAllTasks());
-        saveTaskToFile(historySaveFile, getListOfAllTasks());
+        saveTaskToFile(historySaveFile, getHistory());
     }
 
     private void saveTaskToFile(File file, List<Task> tasks) {
@@ -29,7 +29,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             for (Task task : tasks) {
                 fileWriter.write(task.toString() + "\n");
             }
-            fileWriter.close();
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при записи файла: " + file.getAbsolutePath(), e);
         }
