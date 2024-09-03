@@ -20,7 +20,7 @@ public class FileBackedTaskManagerTest {
 
     @BeforeEach
     void setUp() {
-        try{
+        try {
             Files.deleteIfExists(Paths.get(TestFilePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -30,7 +30,7 @@ public class FileBackedTaskManagerTest {
 
     @AfterEach
     void del() {
-        try{
+        try {
             Files.deleteIfExists(Paths.get(TestFilePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -39,16 +39,16 @@ public class FileBackedTaskManagerTest {
 
     @Test
     void loadFromFileTaskTest() {
-        Task task1 = new Task("Task1" , "desc1", TaskStatus.NEW);
-        Task task2 = new Task("Task2" , "desc2", TaskStatus.IN_PROGRESS);
+        Task task1 = new Task("Task1", "desc1", TaskStatus.NEW);
+        Task task2 = new Task("Task2", "desc2", TaskStatus.IN_PROGRESS);
         manager.createTask(task1);
         manager.createTask(task2);
     }
 
     @Test
     void loadFromFileSubtaskAndEpicTest() {
-        Epic epic1 = new Epic("Epic1", "descEpic",TaskStatus.NEW);
-        Subtask subtask1 = new Subtask(epic1.getId(),"Task1" , "desc1",TaskStatus.NEW);
+        Epic epic1 = new Epic("Epic1", "descEpic", TaskStatus.NEW);
+        Subtask subtask1 = new Subtask(epic1.getId(),"Task1", "desc1", TaskStatus.NEW);
         manager.createEpic(epic1);
         manager.createSubtask(subtask1);
     }
