@@ -20,7 +20,7 @@ class InMemoryHistoryManagerTest {
     Task task3;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         task1  = new Task("Задача 1", "Описание", TaskStatus.NEW);
         task2  = new Task("Задача 2", "Описание", TaskStatus.NEW);
         taskManager.createTask(task1);
