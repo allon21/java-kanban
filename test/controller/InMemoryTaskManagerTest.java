@@ -5,7 +5,7 @@ import controller.TaskManager;
 import model.Epic;
 import model.Subtask;
 import model.Task;
-import model.TaskStatus;
+import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,12 +40,14 @@ class InMemoryTaskManagerTest {
         assertEquals(task1, taskManager.getTaskById(task1.getId()), "InMemoryTaskManager " +
                 "должен создать и вернуть по её id ту же задачу.");
     }
+
     @Test
     void shouldCreateAndReturnSameSubtaskById() {
         taskManager.createSubtask(subtask1);
         assertEquals(subtask1, taskManager.getSubtaskById(subtask1.getId()), "InMemoryTaskManager " +
                 "должен создать и вернуть по её id ту же подзадачу.");
     }
+
     @Test
     void shouldCreateAndReturnSameEpicById() {
         taskManager.createEpic(epic1);

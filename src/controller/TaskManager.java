@@ -6,6 +6,8 @@ import model.Task;
 import java.util.List;
 
 public interface TaskManager {
+    List<Task> getListOfAllTasks();
+
     List<Task> getTasks();
 
     List<Epic> getEpics();

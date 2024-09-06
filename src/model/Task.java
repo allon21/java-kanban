@@ -1,21 +1,32 @@
 package model;
 
-import java.util.Objects;
+import enums.TaskStatus;
+import enums.TaskTypes;
 
 public class Task {
     private String name;
     private String description;
     private int id;
     private TaskStatus status;
+    private TaskTypes taskType = TaskTypes.TASK;
 
     public Task(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
         this.status = status;
+        this.taskType = taskType;
     }
 
     public String getName() {
         return name;
+    }
+
+    public TaskTypes getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskTypes taskType) {
+        this.taskType = taskType;
     }
 
     public void setName(String name) {
@@ -48,12 +59,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "tasks.Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                '}';
+        return getId() +
+                "," + getTaskType() +
+                "," + getName() +
+                "," + getStatus() +
+                "," + getDescription() + ",";
     }
 
     @Override

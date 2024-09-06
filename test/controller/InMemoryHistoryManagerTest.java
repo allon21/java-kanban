@@ -1,12 +1,9 @@
 package test.controller;
 
-import controller.HistoryManager;
 import controller.Managers;
 import controller.TaskManager;
-import model.Epic;
-import model.Subtask;
 import model.Task;
-import model.TaskStatus;
+import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,7 @@ class InMemoryHistoryManagerTest {
     Task task3;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         task1  = new Task("Задача 1", "Описание", TaskStatus.NEW);
         task2  = new Task("Задача 2", "Описание", TaskStatus.NEW);
         taskManager.createTask(task1);
@@ -34,13 +31,13 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void historyListShouldNotBeEmpty(){
-        assertNotEquals(0, historyList.size() , "taskManager.getHistory() должен вернуть " +
+    void historyListShouldNotBeEmpty() {
+        assertNotEquals(0, historyList.size(), "taskManager.getHistory() должен вернуть " +
                 "не пустой список.");
     }
 
     @Test
-    void historyListShouldBeSize3(){
+    void historyListShouldBeSize3() {
         task3  = new Task("Задача 3", "Описание", TaskStatus.NEW);
         taskManager.createTask(task3);
         taskManager.getTaskById(task3.getId());
@@ -50,15 +47,16 @@ class InMemoryHistoryManagerTest {
         assertEquals(3, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
                 "список с 3 значениями, независимо сколько раз мы доставали одну и туже задачу.");
     }
+
     @Test
-    void historyListShouldBeRemoveTask(){
+    void historyListShouldBeRemoveTask() {
         taskManager.removeTaskById(task1.getId());
         assertEquals(1, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
                 "список с 2 значениями, после удаления задачи.");
     }
 
     @Test
-    void historyListShouldBeRemoveTask1(){
+    void historyListShouldBeRemoveTask1() {
         taskManager.removeTaskById(task1.getId());
         taskManager.removeTaskById(task2.getId());
         assertEquals(0, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
