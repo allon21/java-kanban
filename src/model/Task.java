@@ -3,18 +3,47 @@ package model;
 import enums.TaskStatus;
 import enums.TaskTypes;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Task {
     private String name;
     private String description;
     private int id;
     private TaskStatus status;
     private TaskTypes taskType = TaskTypes.TASK;
+    private Duration duration;
+    private LocalDateTime startTime;
 
-    public Task(String name, String description, TaskStatus status) {
+    public Task(String name, String description, TaskStatus status, Duration duration, LocalDateTime startTime) {
         this.name = name;
         this.description = description;
         this.status = status;
-        this.taskType = taskType;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime(){
+        if(startTime == null){
+            return null;
+        }
+        return startTime.plus(duration);
     }
 
     public String getName() {
