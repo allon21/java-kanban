@@ -31,11 +31,13 @@ public class Subtask extends Task {
     @Override
     public String toString() {
         return getId() +
-                "," + getTaskType() +
-                "," + getName() +
-                "," + getStatus() +
-                "," + getDescription() +
-                "," + getEpicId();
+                ", " + getTaskType() +
+                ", " + getName() +
+                ", " + getStatus() +
+                ", " + getDescription() +
+                ", " + getDuration() +
+                ", " + getStartTime() +
+                ", " + getEpicId();
     }
 
     @Override

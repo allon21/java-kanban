@@ -6,6 +6,8 @@ import model.Subtask;
 import model.Task;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
@@ -23,7 +25,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private void saveTaskToFile(File file, List<Task> tasks) {
-        String title = "id,type,name,status,description,epic\n";
+        String title = "id, type, name, status, description, duration, startTime, epicID, endTime\n";
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(title);
             for (Task task : tasks) {
@@ -60,16 +62,17 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = tasks[2].trim();
         TaskStatus status = TaskStatus.valueOf(tasks[3].trim());
         String descrip = tasks[4].trim();
-        if (tasks.length > 5 && !tasks[5].trim().isEmpty()) {
-            epicId = Integer.parseInt(tasks[5].trim());
-        }
+        Duration duration = Duration.ofMinutes(Long.parseLong(tasks[5].trim()));
+        LocalDateTime startTime = LocalDateTime.parse(tasks[6].trim());
         switch (type) {
             case "TASK":
-                return new Task(name, descrip, status);
+                return new Task(name, descrip, status, duration, startTime);
             case "SUBTASK":
-                return new Subtask(epicId, name, descrip, status);
+                epicId = Integer.parseInt(tasks[8].trim());
+                return new Subtask(epicId, name, descrip, status, duration, startTime);
             case "EPIC":
-                return new Epic(name, descrip, status);
+                LocalDateTime endTime = LocalDateTime.parse(tasks[9]);
+                return new Epic(name, descrip, status, duration, startTime, endTime);
             default:
                 return null;
         }
