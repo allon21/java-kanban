@@ -1,14 +1,6 @@
-package test.controller;
-
-import controller.Managers;
-import controller.TaskManager;
-import model.Task;
-import enums.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {

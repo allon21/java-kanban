@@ -92,7 +92,9 @@ public class Task {
                 "," + getTaskType() +
                 "," + getName() +
                 "," + getStatus() +
-                "," + getDescription() + ",";
+                "," + getDescription() +
+                ", " + getDuration() +
+                ", " + getStartTime();
     }
 
     @Override
