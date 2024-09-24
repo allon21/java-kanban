@@ -39,8 +39,9 @@ public class Task {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime(){
-        if(startTime == null){
+    public LocalDateTime getEndTime() {
+
+        if (startTime == null) {
             return null;
         }
         return startTime.plus(duration);
