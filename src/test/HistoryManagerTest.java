@@ -23,8 +23,7 @@ class HistoryManagerTest {
 
     @BeforeEach
     void setUp() {
-        task1  = new Task("Задача 1", "Описание", TaskStatus.NEW , Duration.ZERO,
-                LocalDateTime.now().plusMinutes(2));
+        task1  = new Task("Задача 1", "Описание", TaskStatus.NEW, Duration.ZERO, LocalDateTime.now());
         task2  = new Task("Задача 2", "Описание", TaskStatus.NEW, Duration.ZERO,
                 LocalDateTime.now().plusMinutes(2));
         taskManager.createTask(task1);
