@@ -17,8 +17,8 @@ class FileBackedTaskManagerTest {
 
     @BeforeEach
     void setUp() {
-        String TestFilePath = "src/resources/testSaveFile";
-        manager = new FileBackedTaskManager(new File(TestFilePath));
+        String testFilePath = "src/resources/testSaveFile";
+        manager = new FileBackedTaskManager(new File(testFilePath));
     }
 
     @Test
