@@ -3,15 +3,18 @@ package model;
 import enums.TaskStatus;
 import enums.TaskTypes;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Subtask extends Task {
     private int epicId;
 
-    public Subtask(String name, String description, TaskStatus status) {
-        super(name, description, status);
+    public Subtask(String name, String description, TaskStatus status, Duration duration, LocalDateTime startTime) {
+        super(name, description, status, duration, startTime);
     }
 
-    public Subtask(int epicId, String name, String description, TaskStatus status) {
-        super(name, description, status);
+    public Subtask(int epicId, String name, String description, TaskStatus status, Duration duration, LocalDateTime startTime) {
+        super(name, description, status, duration, startTime);
         this.epicId = epicId;
         this.setTaskType(TaskTypes.SUBTASK);
     }
@@ -28,11 +31,13 @@ public class Subtask extends Task {
     @Override
     public String toString() {
         return getId() +
-                "," + getTaskType() +
-                "," + getName() +
-                "," + getStatus() +
-                "," + getDescription() +
-                "," + getEpicId();
+                ", " + getTaskType() +
+                ", " + getName() +
+                ", " + getStatus() +
+                ", " + getDescription() +
+                ", " + getDuration() +
+                ", " + getStartTime() +
+                ", " + getEpicId();
     }
 
     @Override

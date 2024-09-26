@@ -1,17 +1,19 @@
-package test.controller;
+package test;
 
 import controller.Managers;
 import controller.TaskManager;
-import model.Task;
 import enums.TaskStatus;
+import model.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InMemoryHistoryManagerTest {
+class HistoryManagerTest {
 
     ArrayList<Task> historyList;
     TaskManager taskManager = Managers.getDefault();
@@ -21,8 +23,9 @@ class InMemoryHistoryManagerTest {
 
     @BeforeEach
     void setUp() {
-        task1  = new Task("Задача 1", "Описание", TaskStatus.NEW);
-        task2  = new Task("Задача 2", "Описание", TaskStatus.NEW);
+        task1  = new Task("Задача 1", "Описание", TaskStatus.NEW, Duration.ZERO, LocalDateTime.now());
+        task2  = new Task("Задача 2", "Описание", TaskStatus.NEW, Duration.ZERO,
+                LocalDateTime.now().plusMinutes(2));
         taskManager.createTask(task1);
         taskManager.createTask(task2);
         taskManager.getTaskById(task1.getId());
@@ -38,7 +41,8 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void historyListShouldBeSize3() {
-        task3  = new Task("Задача 3", "Описание", TaskStatus.NEW);
+        task3  = new Task("Задача 3", "Описание", TaskStatus.NEW,  Duration.ZERO,
+                LocalDateTime.now().plusMinutes(2));
         taskManager.createTask(task3);
         taskManager.getTaskById(task3.getId());
         taskManager.getTaskById(task2.getId());
@@ -62,5 +66,4 @@ class InMemoryHistoryManagerTest {
         assertEquals(0, taskManager.getHistory().size(), "taskManager.getHistory() должен вернуть " +
                 "пустой список");
     }
-
 }

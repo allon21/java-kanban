@@ -3,31 +3,51 @@ package model;
 import enums.TaskStatus;
 import enums.TaskTypes;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Epic extends Task {
     private ArrayList<Integer> subtasksList = new ArrayList<>();
 
-    public Epic(String name, String description, TaskStatus status) {
+    @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
 
-        super(name, description, status);
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    private LocalDateTime endTime;
+
+    public Epic(String name, String description, TaskStatus status, Duration duration, LocalDateTime startTime,
+                LocalDateTime endTime) {
+        super(name, description, status, duration, startTime);
         this.setTaskType(TaskTypes.EPIC);
+        this.endTime = endTime;
     }
 
     public ArrayList<Integer> getSubtasks() {
-
         return subtasksList;
     }
 
     public void setSubtasks(Subtask subtasks) {
-
         this.subtasksList.add(subtasks.getId());
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return getId() +
+                "," + getTaskType() +
+                "," + getName() +
+                "," + getStatus() +
+                "," + getDescription() +
+                ", " + getDuration() +
+                ", " + getStartTime() +
+                ", " + getId() +
+                ", " + getEndTime();
     }
 
     @Override
