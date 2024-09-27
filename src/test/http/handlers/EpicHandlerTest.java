@@ -62,11 +62,11 @@ class EpicHandlerTest {
         Epic epic1 = new Epic("Epic 1", "Epic Description", TaskStatus.NEW, Duration.ZERO,
                 LocalDateTime.now(), LocalDateTime.now().plusMinutes(5));
         manager.createEpic(epic1);
-        String ToGson = gson.toJson(epic1);
+        String epicToGson = gson.toJson(epic1);
 
         HttpClient httpClient = HttpClient.newHttpClient();
         URI url = URI.create("http://localhost:8800/epics");
-        HttpRequest request = HttpRequest.newBuilder().uri(url).POST(HttpRequest.BodyPublishers.ofString(ToGson))
+        HttpRequest request = HttpRequest.newBuilder().uri(url).POST(HttpRequest.BodyPublishers.ofString(epicToGson))
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
