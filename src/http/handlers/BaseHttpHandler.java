@@ -1,15 +1,9 @@
 package http.handlers;
 
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import controller.TaskManager;
-import exception.TaskIntersectionException;
-import exception.TaskNotFoundExeption;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 public class BaseHttpHandler {
 

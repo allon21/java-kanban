@@ -22,16 +22,16 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try {
-            if(exchange.getRequestMethod().equals("GET")){
+            if (exchange.getRequestMethod().equals("GET")) {
                 List<Task> historyList = taskManager.getHistory();
                 sendText(exchange, gson.toJson(historyList), 200);
             } else {
-                sendText(exchange,"Команды нет",404);
+                sendText(exchange, "Команды нет", 404);
             }
-        }catch (JsonSyntaxException e) {
-            sendText(exchange,e.getMessage(), 406);
-        }catch (NumberFormatException e) {
-            sendText(exchange,e.getMessage(), 404);
+        } catch (JsonSyntaxException e) {
+            sendText(exchange, e.getMessage(), 406);
+        } catch (NumberFormatException e) {
+            sendText(exchange, e.getMessage(), 404);
         }
     }
 }

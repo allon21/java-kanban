@@ -8,7 +8,6 @@ import exception.TaskIntersectionException;
 import exception.TaskNotFoundExeption;
 import model.Epic;
 import model.Subtask;
-import model.Task;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -36,12 +35,12 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                 case "DELETE":
                     handleDeleteRequest(exchange);
                 default:
-                    sendText(exchange,"Пока нет такого метода", 500);
+                    sendText(exchange, "Пока нет такого метода", 500);
             }
-        }catch (TaskNotFoundExeption e) {
-            sendText(exchange,e.getMessage(), 404);
-        }catch (TaskIntersectionException e) {
-            sendText(exchange,e.getMessage(), 406);
+        } catch (TaskNotFoundExeption e) {
+            sendText(exchange, e.getMessage(), 404);
+        } catch (TaskIntersectionException e) {
+            sendText(exchange, e.getMessage(), 406);
         }
     }
 
@@ -53,20 +52,20 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
             taskManager.removeEpicsById(epicId);
         }
 
-        exchange.sendResponseHeaders(201, 0);
+        exchange.sendResponseHeaders(200, 0);
         exchange.close();
     }
 
     private void handlePostRequest(HttpExchange exchange) throws IOException {
-        String requestBody = new String(exchange.getRequestMethod().getBytes(), StandardCharsets.UTF_8);
+        String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
         Epic epic = gson.fromJson(requestBody, Epic.class);
         try {
             if (epic.getId() != null) {
-                taskManager.taskUpdate(epic);
+                taskManager.epicUpdate(epic);
             } else {
-                taskManager.createTask(epic);
+                taskManager.createEpic(epic);
             }
-            exchange.sendResponseHeaders(201,0);
+            exchange.sendResponseHeaders(201, 0);
             exchange.close();
         } catch (TaskIntersectionException e) {
             sendText(exchange, e.getMessage(), 406);
@@ -77,7 +76,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         String[] pathParts = exchange.getRequestURI().getPath().split("/");
         if (pathParts.length == 2) {
             List<Epic> epic = taskManager.getEpics();
-            sendText(exchange, gson.toJson(epic),200);
+            sendText(exchange, gson.toJson(epic), 200);
         } else if (pathParts.length == 3) {
             handleGetEpicById(exchange, pathParts[2]);
         } else if (pathParts.length == 4 && pathParts[3].equals("subtask")) {
@@ -91,7 +90,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         Epic epic = taskManager.getEpicById(Integer.parseInt(epicId));
         if (epic != null) {
             List<Subtask> subtasks = new ArrayList<>();
-            for (int id : epic.getSubtasks()){
+            for (int id : epic.getSubtasks()) {
                 subtasks.add(taskManager.getSubtaskById(id));
             }
             sendText(exchange, gson.toJson(subtasks), 200);

@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    private File saveFile;
-    private File historySaveFile = new File("src/resources/historyFile.csv");
+    private final File saveFile;
+    private final File historySaveFile = new File("src/resources/historyFile.csv");
 
     public FileBackedTaskManager(File saveFile) {
         super();

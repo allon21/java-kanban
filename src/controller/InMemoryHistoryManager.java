@@ -10,7 +10,7 @@ import java.util.List;
 public class InMemoryHistoryManager implements HistoryManager {
     public Node<Task> first;
     public Node<Task> last;
-    private HashMap<Integer, Node<Task>> historyHashMap = new HashMap<>();
+    private final HashMap<Integer, Node<Task>> historyHashMap = new HashMap<>();
 
     public void linkLast(Task task) {
         Node<Task> existingNode = historyHashMap.get(task.getId());
@@ -43,7 +43,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void remove(int id) {
         if (!historyHashMap.containsKey(id)) {
-            return;
         } else {
             removeNode(historyHashMap.get(id));
         }

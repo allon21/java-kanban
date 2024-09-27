@@ -7,7 +7,6 @@ import controller.TaskManager;
 import exception.TaskIntersectionException;
 import exception.TaskNotFoundExeption;
 import model.Subtask;
-import model.Task;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -34,12 +33,12 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
                 case "DELETE":
                     handleDeleteRequest(exchange);
                 default:
-                    sendText(exchange,"Пока нет такого метода", 500);
+                    sendText(exchange, "Пока нет такого метода", 500);
             }
-        }catch (TaskNotFoundExeption e) {
-            sendText(exchange,e.getMessage(), 404);
-        }catch (TaskIntersectionException e) {
-            sendText(exchange,e.getMessage(), 406);
+        } catch (TaskNotFoundExeption e) {
+            sendText(exchange, e.getMessage(), 404);
+        } catch (TaskIntersectionException e) {
+            sendText(exchange, e.getMessage(), 406);
         }
     }
 
@@ -51,12 +50,12 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
             taskManager.removeSubtaskById(subtaskId);
         }
 
-        exchange.sendResponseHeaders(201, 0);
+        exchange.sendResponseHeaders(200, 0);
         exchange.close();
     }
 
     private void handlePostRequest(HttpExchange exchange) throws IOException {
-        String requestBody = new String(exchange.getRequestMethod().getBytes(), StandardCharsets.UTF_8);
+        String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
         Subtask subtask = gson.fromJson(requestBody, Subtask.class);
         try {
             if (subtask.getId() != null) {
@@ -64,7 +63,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
             } else {
                 taskManager.createSubtask(subtask);
             }
-            exchange.sendResponseHeaders(201,0);
+            exchange.sendResponseHeaders(201, 0);
             exchange.close();
         } catch (TaskIntersectionException e) {
             sendText(exchange, e.getMessage(), 406);
@@ -75,7 +74,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
         String[] pathParts = exchange.getRequestURI().getPath().split("/");
         if (pathParts.length == 2) {
             List<Subtask> subtasks = taskManager.getSubtasks();
-            sendText(exchange, gson.toJson(subtasks),200);
+            sendText(exchange, gson.toJson(subtasks), 200);
         } else if (pathParts.length == 3) {
             handleGetSubtaskById(exchange, pathParts[2]);
         } else {
