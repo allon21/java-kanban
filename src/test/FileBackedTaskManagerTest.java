@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileBackedTaskManagerTest {
     FileBackedTaskManager manager;
@@ -29,7 +30,7 @@ class FileBackedTaskManagerTest {
         Subtask subtask2 = new Subtask(epic1.getId(), "subtask2", "desc2", TaskStatus.NEW,
                 Duration.ofHours(1), LocalDateTime.now());
         manager.createSubtask(subtask2);
-        Subtask subtask1 = new Subtask(epic1.getId(),"subtask1", "desc1", TaskStatus.NEW,
+        Subtask subtask1 = new Subtask(epic1.getId(), "subtask1", "desc1", TaskStatus.NEW,
                 Duration.ofHours(2), LocalDateTime.now().plusHours(2));
         manager.createSubtask(subtask1);
         assertEquals(TaskStatus.NEW, epic1.getStatus(), "Epic должен быть со статусом NEW");
@@ -43,7 +44,7 @@ class FileBackedTaskManagerTest {
         Subtask subtask2 = new Subtask(epic1.getId(), "subtask2", "desc2", TaskStatus.IN_PROGRESS,
                 Duration.ofHours(1), LocalDateTime.now());
         manager.createSubtask(subtask2);
-        Subtask subtask1 = new Subtask(epic1.getId(),"subtask1", "desc1", TaskStatus.IN_PROGRESS,
+        Subtask subtask1 = new Subtask(epic1.getId(), "subtask1", "desc1", TaskStatus.IN_PROGRESS,
                 Duration.ofHours(2), LocalDateTime.now().plusHours(2));
         manager.createSubtask(subtask1);
         assertEquals(TaskStatus.IN_PROGRESS, epic1.getStatus(), "Epic должен быть со статусом InProgress");
@@ -57,7 +58,7 @@ class FileBackedTaskManagerTest {
         Subtask subtask2 = new Subtask(epic1.getId(), "subtask2", "desc2", TaskStatus.DONE,
                 Duration.ofHours(1), LocalDateTime.now());
         manager.createSubtask(subtask2);
-        Subtask subtask1 = new Subtask(epic1.getId(),"subtask1", "desc1", TaskStatus.DONE,
+        Subtask subtask1 = new Subtask(epic1.getId(), "subtask1", "desc1", TaskStatus.DONE,
                 Duration.ofHours(2), LocalDateTime.now().plusHours(2));
         manager.createSubtask(subtask1);
         assertEquals(TaskStatus.DONE, epic1.getStatus(), "Epic должен быть со статусом DONE");
@@ -71,7 +72,7 @@ class FileBackedTaskManagerTest {
         Subtask subtask2 = new Subtask(epic1.getId(), "subtask2", "desc2", TaskStatus.DONE,
                 Duration.ofHours(1), LocalDateTime.now());
         manager.createSubtask(subtask2);
-        Subtask subtask1 = new Subtask(epic1.getId(),"subtask1", "desc1", TaskStatus.NEW,
+        Subtask subtask1 = new Subtask(epic1.getId(), "subtask1", "desc1", TaskStatus.NEW,
                 Duration.ofHours(2), LocalDateTime.now().plusHours(2));
         manager.createSubtask(subtask1);
         assertEquals(TaskStatus.IN_PROGRESS, epic1.getStatus(), "Epic должен быть со статусом InProgress");

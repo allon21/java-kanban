@@ -15,9 +15,9 @@ public class Node<T> {
         return data;
     }
 
-/*    public void setData(Task data) {
+    public void setData(Task data) {
         this.data = data;
-    }*/
+    }
 
     public Node<Task> getNext() {
         return next;

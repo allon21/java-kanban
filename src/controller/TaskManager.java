@@ -3,10 +3,13 @@ package controller;
 import model.Epic;
 import model.Subtask;
 import model.Task;
+
 import java.util.List;
 
 public interface TaskManager {
     List<Task> getListOfAllTasks();
+
+    List<Task> getPrioritizedTasks();
 
     List<Task> getTasks();
 
