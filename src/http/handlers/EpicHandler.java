@@ -30,12 +30,16 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
             switch (exchange.getRequestMethod()) {
                 case "GET":
                     handleGetRequest(exchange);
+                    break;
                 case "POST":
                     handlePostRequest(exchange);
+                    break;
                 case "DELETE":
                     handleDeleteRequest(exchange);
+                    break;
                 default:
                     sendText(exchange, "Пока нет такого метода", 500);
+                    break;
             }
         } catch (TaskNotFoundExeption e) {
             sendText(exchange, e.getMessage(), 404);

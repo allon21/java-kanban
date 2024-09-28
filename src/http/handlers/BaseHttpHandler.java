@@ -14,18 +14,5 @@ public class BaseHttpHandler {
         exchange.getResponseBody().write(resp);
         exchange.close();
     }
-/*
-
-    private void sendHasInteractions(HttpExchange exchange) throws IOException {
-        sendText(exchange,"Задача пересекается с существующеми", 409);
-    }
-
-    private void sendNotFound(HttpExchange exchange) throws IOException {
-        sendText(exchange,"Объект не найден", 404);
-    }
-
-    private void sendSuccess(HttpExchange exchange) throws IOException {
-        sendText(exchange,"Объект не найден", 404);
-    }*/
 }
 
