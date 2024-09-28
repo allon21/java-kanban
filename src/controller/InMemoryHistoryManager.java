@@ -1,12 +1,16 @@
 package controller;
+
 import model.Node;
 import model.Task;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
     public Node<Task> first;
     public Node<Task> last;
-    private HashMap<Integer, Node<Task>> historyHashMap = new HashMap<>();
+    private final HashMap<Integer, Node<Task>> historyHashMap = new HashMap<>();
 
     public void linkLast(Task task) {
         Node<Task> existingNode = historyHashMap.get(task.getId());
@@ -38,9 +42,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void remove(int id) {
-        if (!historyHashMap.containsKey(id)) {
-            return;
-        } else {
+        if (historyHashMap.containsKey(id)) {
             removeNode(historyHashMap.get(id));
         }
     }

@@ -51,16 +51,16 @@ public class Task {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public TaskTypes getTaskType() {
         return taskType;
     }
 
     public void setTaskType(TaskTypes taskType) {
         this.taskType = taskType;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -71,7 +71,7 @@ public class Task {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

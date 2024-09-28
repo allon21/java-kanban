@@ -23,8 +23,8 @@ class HistoryManagerTest {
 
     @BeforeEach
     void setUp() {
-        task1  = new Task("Задача 1", "Описание", TaskStatus.NEW, Duration.ZERO, LocalDateTime.now());
-        task2  = new Task("Задача 2", "Описание", TaskStatus.NEW, Duration.ZERO,
+        task1 = new Task("Задача 1", "Описание", TaskStatus.NEW, Duration.ZERO, LocalDateTime.now());
+        task2 = new Task("Задача 2", "Описание", TaskStatus.NEW, Duration.ZERO,
                 LocalDateTime.now().plusMinutes(2));
         taskManager.createTask(task1);
         taskManager.createTask(task2);
@@ -41,7 +41,7 @@ class HistoryManagerTest {
 
     @Test
     void historyListShouldBeSize3() {
-        task3  = new Task("Задача 3", "Описание", TaskStatus.NEW,  Duration.ZERO,
+        task3 = new Task("Задача 3", "Описание", TaskStatus.NEW, Duration.ZERO,
                 LocalDateTime.now().plusMinutes(2));
         taskManager.createTask(task3);
         taskManager.getTaskById(task3.getId());

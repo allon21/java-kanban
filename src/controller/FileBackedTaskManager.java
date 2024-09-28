@@ -11,12 +11,30 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    private File saveFile;
-    private File historySaveFile = new File("src/resources/historyFile.csv");
+    private final File saveFile;
+    private final File historySaveFile = new File("src/resources/historyFile.csv");
 
     public FileBackedTaskManager(File saveFile) {
         super();
         this.saveFile = saveFile;
+    }
+
+    public static FileBackedTaskManager loadFromFile(File file) {
+        FileBackedTaskManager fileManager = new FileBackedTaskManager(file);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                Task task = fileManager.fromString(line);
+                if (task != null) {
+                    fileManager.createTask(task);
+                }
+            }
+
+        } catch (IOException e) {
+            throw new ManagerSaveException("Ошибка загрузки файла", e);
+        }
+        return fileManager;
     }
 
     private void save() {
@@ -34,24 +52,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при записи файла: " + file.getAbsolutePath(), e);
         }
-    }
-
-  public static FileBackedTaskManager loadFromFile(File file) {
-        FileBackedTaskManager fileManager = new FileBackedTaskManager(file);
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                Task task = fileManager.fromString(line);
-                    if (task != null) {
-                        fileManager.createTask(task);
-                    }
-            }
-
-        } catch (IOException e) {
-            throw new ManagerSaveException("Ошибка загрузки файла", e);
-        }
-        return fileManager;
     }
 
     private Task fromString(String s) {
