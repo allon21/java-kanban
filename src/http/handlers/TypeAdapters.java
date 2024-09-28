@@ -23,7 +23,7 @@ public class TypeAdapters {
 
         @Override
         public Duration read(JsonReader jsonReader) throws IOException {
-            if (jsonReader.peek() == JsonToken.NULL){
+            if (jsonReader.peek() == JsonToken.NULL) {
                 jsonReader.nextNull();
                 return null;
             }
@@ -44,7 +44,7 @@ public class TypeAdapters {
 
         @Override
         public LocalDateTime read(JsonReader jsonReader) throws IOException {
-            if (jsonReader.peek() == JsonToken.NULL){
+            if (jsonReader.peek() == JsonToken.NULL) {
                 jsonReader.nextNull();
                 return null;
             }
